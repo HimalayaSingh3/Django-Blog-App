@@ -1,0 +1,50 @@
+*{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    text-decoration: none;
+    font-family: monospace;
+}
+nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background:indigo;
+    color: white;
+    padding: 14px;
+}
+nav .name{
+    color: white;
+    font-size:25px;
+}
+.menu{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.menu .menu-btn{
+    outline: none;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid black;
+    cursor: pointer;
+
+}
+.menu #menu-bar{
+    border-radius: 4px;
+    position: absolute;
+    top: 60px;
+    display: none;
+    border: 1px solid black;
+    padding: 6px;
+    background-color: white;
+}
+li{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 5px;
+}
+li a{
+    color: black;
+}

@@ -1,0 +1,46 @@
+{% extends 'base.html' %} {% block content %} {% load static %}
+
+<div>
+  <nav>
+    <a href="{% url 'base' %}" class="name">Blogger</a>
+    <div class="menu">
+      <button onclick="toggle()" class="menu-btn">Profile</button>
+      <div class="navbar" id="menu-bar">
+        <li><a href="/home">Home</a></li>
+        <li><a href="/my-posts">My Posts</a></li>
+        <li><a href="/add-posts">Add Post</a></li>
+        <li><a href="/logout">Logout</a></li>
+      </div>
+    </div>
+  </nav>
+  <main>
+    <div class="container custom-container" style="max-width: 1350px">
+      <h1>My Posts</h1>
+      {% for post in posts %}
+      <article class="media content-section">
+        <div
+          class="media-body"
+          style="border: 1px solid black; padding: 23px; margin-bottom: 10px"
+        >
+          <div class="article-metadata">
+            <h2
+              class="text-uppercase"
+              style="text-align: left; float: left; color: #000000"
+            >
+              {{ post.author }}
+            </h2>
+            <h5 style="text-align: right; float: right">
+              {{ post.date_posted|date:"F d, Y" }}
+            </h5>
+            <hr style="clear: both" />
+          </div>
+          <h3>{{ post.title }}</h3>
+          <p class="article-content">{{ post.content }}</p>
+          <br /><br />
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </main>
+</div>
+{% endblock %}

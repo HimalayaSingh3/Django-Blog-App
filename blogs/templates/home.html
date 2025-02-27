@@ -1,0 +1,111 @@
+{% extends 'base.html' %} {% block content %} {% load static %}
+
+<div>
+  <nav>
+    <a href="{% url 'base' %}" class="name">Blogger</a>
+    <div class="menu">
+      <button onclick="toggle()" class="menu-btn">Profile</button>
+      <div class="navbar" id="menu-bar">
+        <li><a href="/home">Home</a></li>
+        <li><a href="/my-posts">My Posts</a></li>
+        <li><a href="/add-posts">Add Post</a></li>
+        <li><a href="/logout">Logout</a></li>
+      </div>
+    </div>
+  </nav>
+  <main>
+    <div
+      class="container custom-container"
+      style="
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        margin-top: 10px;
+        max-width: 100%;
+        padding: 20px;
+        grid-auto-rows: minmax(100px, auto);
+      "
+    >
+      {% for post in posts %}
+      <article class="media content-section">
+        <div
+          class="media-body"
+          style="
+            border: 1px solid black;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 10px;
+            background-color: rgba(191, 201, 239, 0.59);
+            display: flex;
+            flex-direction: column;
+          "
+        >
+          <div class="article-metadata" style="display:flex; justify-content:space-between; ">
+            <div style="font-size:10px;">
+              <h1
+                class="text-uppercase"
+                style="  color: rgb(0, 0, 0); font-size:10px;"
+              >Posted By :
+                {{ post.author }}
+              </h1>
+            </div>
+            <div style="font-size:10px;">
+              <h5 style="font-size:10px;">
+                {{ post.date_posted|date:"F d, Y" }}
+              </h5>
+            </div>
+          </div>
+          <hr />
+          <h3
+            style="
+              color: blue;
+              text-transform: uppercase;
+              font-weight: bold;
+              font-size: 20px;
+            "
+          >
+            {{ post.title }}
+          </h3>
+          <p
+            class="article-content"
+            id="content-{{ post.id }}"
+            data-full-content="{{ post.content }}"
+          >
+            {{ post.content|slice:":10" }}...
+          </p>
+          <p
+            onclick="toggleContent('{{ post.id }}')"
+            style="
+              color: purple;
+              align-self: flex-end;
+              text-decoration: underline;
+              border: none;
+              padding: 5px 10px;
+              border-radius: 5px;
+              cursor: pointer;
+            "
+          >
+            View More
+          </p>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </main>
+</div>
+
+<script>
+  function toggleContent(postId) {
+    const content = document.getElementById(`content-${postId}`);
+    if (content.dataset.expanded === "true") {
+      content.innerText = content.dataset.short;
+      content.dataset.expanded = "false";
+    } else {
+      content.dataset.short = content.innerText;
+      content.innerText = content.dataset.fullContent;
+      content.dataset.expanded = "true";
+    }
+  }
+</script>
+
+{% endblock %}

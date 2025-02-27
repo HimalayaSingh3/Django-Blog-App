@@ -1,0 +1,52 @@
+{% extends 'base.html' %} {% block content %} {% load static %}
+
+<div>
+  <nav>
+    <a href="{% url 'base' %}" class="name">Blogger</a>
+    <div class="menu">
+      <button onclick="toggle()" class="menu-btn">Profile</button>
+      <div class="navbar" id="menu-bar">
+       <li><a href="/home">Home</a></li>
+        <li><a href="/my-posts">My Posts</a></li>
+        <li><a href="/add-posts">Add Post</a></li>
+        <li><a href="/logout">Logout</a></li>
+      </div>
+    </div>
+  </nav>
+  <main>
+    <form method="post">
+      {% csrf_token %}
+      <div class="container custom-container p-5" style="max-width: 1250px">
+        <br /><br />
+        <h1 class="fw-bolder">Make a new post.</h1>
+        <hr />
+        <br />
+        <div class="mb-3">
+          <h3>
+            <label for="exampleInputEmail1" class="form-label"
+              >Heading/Title</label
+            >
+          </h3>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleInputText"
+            aria-describedby="emailHelp"
+            name="title"
+          />
+        </div>
+        <div class="form-group">
+          <h3><label for="exampleFormControlTextarea3">Content</label></h3>
+          <textarea
+            class="form-control"
+            id="exampleFormControlTextarea3"
+            rows="7"
+            name="content"
+          ></textarea>
+        </div>
+        <input class="btn btn-primary" type="submit" value="Submit" />
+      </div>
+    </form>
+  </main>
+</div>
+{% endblock %}
